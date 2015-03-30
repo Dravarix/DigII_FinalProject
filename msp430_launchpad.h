@@ -1,8 +1,8 @@
 /*
- * msp430_launchpad.h
+ * This file contains macros for the pin values in the
+ * MSP430G2553 with Launchpad.
  *
- *  Created on: Sep 17, 2014
- *      Author: James Ritchie
+ * @author James Ritchie, Mario DeSantis, Jon Fredrickson
  */
 
 #ifndef MSP430_LAUNCHPAD_H_

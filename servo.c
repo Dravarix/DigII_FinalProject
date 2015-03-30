@@ -1,21 +1,7 @@
-/*
- * servo.c
- *
- * Author: James Ritchie III, Mario DeSantis, Jon Frederickson
- * Date Submitted: December 16, 2014
- * Latest Version: 20141216
- *
- * Sets up and controls a servo motor using pin 2.6 and Timer A0.
- */
-
 #include "servo.h"
 #include <msp430.h>
 #include "msp430_launchpad.h"
 
-/**
- * Initializes servo, setting up pin 2.6 to be used for PWM output
- * to the servo. Also sets the default start state for the servo.
- */
 void servoInit(void){
 	//Set the configuration for Timer_A2 to Up Mode with SMCLK as source, interrupts enabled
 	TA0CTL |= TASSEL_2 + MC_1;
@@ -34,9 +20,6 @@ void servoInit(void){
 	TA0CCR1 = 1650;
 }
 
-/*
- * Sets the direction of the servo.
- */
 void servoSetDuty(uint16_t regVal){
 	if(regVal >= DUTY_UPPER_BOUND){
 		TA0CCR1 = DUTY_UPPER_BOUND;

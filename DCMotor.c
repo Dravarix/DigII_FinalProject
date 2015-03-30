@@ -1,26 +1,7 @@
-/**
- * DCMotor.c
- *
- * Author: James Ritchie III, Mario DeSantis, Jon Frederickson
- * Date Submitted: December 16, 2014
- * Latest Version: 20141216
- *
- * Sets up and controls two DC Motors using Timer A1
- * for PWM and 4 GPIO pins.
- */
-
 #include "DCMotor.h"
 #include <msp430.h>
 #include "msp430_launchpad.h"
 
-/**
- * Initializes the pins used for the DC Motors.
- * This sets Pins 2.2 and 2.5 up for PWM using
- * Timer A1 on the MSP430. Also sets up pins
- * 1.4 and 1.5 to control the input pins of
- * motor A, and 1.6 and 1.7 pins to control the
- * input pins of motor B.
- */
 void DCMotorInit(void){
 	//Set the configuration for Timer_A to Up Mode with SMCLK as source
 	TA1CTL |= TASSEL_2 + MC_1;
@@ -48,17 +29,6 @@ void DCMotorInit(void){
 	TA1CCR2 = 0;
 }
 
-/**
- * Sets the motor speed and direction based on the input
- * for both motors. A negative value indicates a backwards
- * direction. This function will enable the correct input
- * pins for motor direction, while disabling the other
- * input pins. It also sends a PWM signal to the enable
- * pins to control speed of the motor.
- *
- * @param motorASpeed - int value from -128 to 127
- * @param motorBSpeed = int value from -128 to 127
- */
 void setDCMotorSpeed(int8_t motorASpeed, int8_t motorBSpeed){
 	//Both motors going forwards
 	if(motorASpeed > 0 && motorBSpeed > 0){
