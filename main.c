@@ -1,7 +1,6 @@
-#include <msp430.h>
+#include "system.h"
 #include "servo.h"
 #include "DCMotor.h"
-#include "time.h"
 
 /*
  * main.c

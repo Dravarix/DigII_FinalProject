@@ -1,6 +1,5 @@
 #include "servo.h"
-#include <msp430.h>
-#include "msp430_launchpad.h"
+#include "system.h"
 
 void servoInit(void){
 	//Set the configuration for Timer_A2 to Up Mode with SMCLK as source, interrupts enabled

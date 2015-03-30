@@ -1,6 +1,5 @@
 #include "DCMotor.h"
-#include <msp430.h>
-#include "msp430_launchpad.h"
+#include "system.h"
 
 void DCMotorInit(void){
 	//Set the configuration for Timer_A to Up Mode with SMCLK as source
