@@ -27,5 +27,10 @@ void servoInit(void);
  */
 void servoSetDuty(uint16_t regVal);
 
+/**
+ * Wrapper function for servoSetDuty
+ * 0 is center point, 127 is maximum, -128 is minimum
+ */
+void servoSetDirection(int8_t dir);
 
 #endif /* SERVO_H_ */
