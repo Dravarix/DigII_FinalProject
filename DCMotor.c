@@ -1,4 +1,4 @@
-/*
+/**
  * DCMotor.c
  *
  * Author: James Ritchie III, Mario DeSantis, Jon Frederickson
