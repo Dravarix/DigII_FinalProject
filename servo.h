@@ -13,6 +13,7 @@
 
 #define DUTY_LOWER_BOUND 1100
 #define DUTY_UPPER_BOUND 2200
+#define DUTY_MID_BOUND 1650
 
 /**
  * Initializes servo, setting up pin 2.6 to be used for PWM output

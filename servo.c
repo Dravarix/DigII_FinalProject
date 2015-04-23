@@ -1,4 +1,3 @@
-#include "servo.h"
 #include "system.h"
 
 void servoInit(void){
@@ -17,6 +16,8 @@ void servoInit(void){
 
 	//Set TA1CCR1 to have an initial period
 	TA0CCR1 = 1650;
+
+	servoSetDuty(DUTY_MID_BOUND);
 }
 
 void servoSetDuty(uint16_t regVal){
