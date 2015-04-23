@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#64bae7"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:ignore="TextFields,HardcodedText" >
+
+    <Button
+        android:id="@+id/connectBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:text="Connect" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dip"
+        android:text="Not Connected"/>
+
+
+    <SeekBar
+        android:id="@+id/speedController"
+        android:progress="50"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/reverseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Reverse"
+        android:layout_above="@+id/speedController"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/forwardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Forward"
+        android:layout_alignTop="@+id/reverseText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/speedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="120sp"
+        android:text="0 %"
+        android:layout_above="@+id/reverseText"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/rowanLogo"
+        android:src="@drawable/rowan_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/IEEE_Logo"
+        android:src="@drawable/ieee_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rowanLogo"
+        android:layout_alignLeft="@+id/brakeBtn"
+        android:layout_alignStart="@+id/brakeBtn" />
+
+    <Button
+        android:id="@+id/brakeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brake"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#FF0000"
+        android:layout_below="@+id/speedController"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp" />
+
+    <Button
+        android:id="@+id/leftBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Left"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#5d9594"
+        android:layout_below="@+id/brakeBtn"
+        android:layout_centerHorizontal="false"
+        android:layout_marginTop="45dp" />
+
+    <Button
+        android:id="@+id/straightBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Straight"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#5d9594"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/brakeBtn"
+        android:layout_marginTop="45dp" />
+
+    <Button
+        android:id="@+id/rightBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Right"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#5d9594"
+        android:layout_alignTop="@+id/straightBtn"
+        android:layout_alignLeft="@+id/forwardText"
+        android:layout_alignStart="@+id/forwardText" />
+</RelativeLayout>
