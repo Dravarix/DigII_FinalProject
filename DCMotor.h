@@ -2,9 +2,14 @@
  * Sets up and controls two DC Motors using Timer A1
  * for PWM and 4 GPIO pins.
  *
- * Author: James Ritchie III, Mario DeSantis, Jon Frederickson
- * Date Submitted: December 16, 2014
- * Latest Version: 20141216
+ * setDCMotorDirection() will set the motors to forward, reverse, or brake.
+ *
+ * setDCMotorSpeed() will set the speed of the motors.
+ *
+ * delay() is used for idling CPU and is for debugging purposes.
+ *
+ * @author James Ritchie III, Mario DeSantis, Jon Frederickson
+ * @version 2015.04.22
  */
 #ifndef DCMOTOR_H_
 #define DCMOTOR_H_
@@ -31,7 +36,9 @@
 void DCMotorInit(void);
 
 /**
- *
+ * Sets the direction of the motors. If a 2 is received, they are set to go
+ * forward. If a 1 is received, they are set to go backwards. If a 0 is
+ * received, they are in brake mode.
  *
  * @param dir Direction the motor is going in. 2 means forward, 1 means reverse,
  * and 0 means zero speed.

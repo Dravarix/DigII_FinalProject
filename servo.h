@@ -1,9 +1,13 @@
 /*
  * Sets up and controls a servo motor using pin 2.6 and Timer A0.
  *
- * Author: James Ritchie III, Mario DeSantis, Jon Frederickson
- * Date Submitted: December 16, 2014
- * Latest Version: 20141216
+ * servoSetDuty() sets the duty cycle of the servo motor.
+ *
+ * servoSetDirection is a wrapper function for servoSetDuty() and should be
+ * used by the general user.
+ *
+ * @author James Ritchie III, Mario DeSantis, Jon Frederickson
+ * @version 2015.04.22
  */
 
 #ifndef SERVO_H_
@@ -24,7 +28,7 @@ void servoInit(void);
 /*
  * Sets the direction of the servo.
  *
- * @param regVal
+ * @param regVal Duty cycle of the servo to set to
  */
 void servoSetDuty(uint16_t regVal);
 

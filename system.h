@@ -1,7 +1,9 @@
 /**
- * Sets up the parameters for the specific system.
+ * Sets up the parameters for the specific system. It also contains all of the
+ * includes needed.
  *
  * @author James Ritchie, Jon Frederickson, Mario DeSantis
+ * @version 2015.04.22
  */
 
 #ifndef SYSTEM_H_
@@ -21,5 +23,7 @@
 #include "DCMotor.h"
 #include "uart.h"
 #include "servo.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 #endif /* SYSTEM_H_ */

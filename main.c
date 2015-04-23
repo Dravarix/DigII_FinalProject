@@ -19,25 +19,24 @@ int main(void) {
 	uart_init();
 	_enable_interrupt();
 
+	//Last set speed
 	uint8_t lastSpeed;
+	//set speed to last speed to initialize.
 	lastSpeed = speed;
 
 	while(1){
-		while (lastSpeed == speed); // wait for speed modification
-			if (speed > 50) {
+		while (lastSpeed == speed); // Wait for speed modification
+			if (speed > 50) { //If slider in app was over 50%, go forward
 				setDCMotorSpeed(SCALE * (speed - 50));
 				setDCMotorDirection(FORWARD);
-				//uart_send(speed);
-			} else if (speed < 50) {
+			} else if (speed < 50) { //If slider in app was belowe 50%, go backward
 				setDCMotorSpeed(SCALE * (50 - speed));
 				setDCMotorDirection(REVERSE);
-				//uart_send(speed);
 			} else {
 				setDCMotorSpeed(0);
 				setDCMotorDirection(BRAKE);
-				//uart_send(speed);
 			}
-		lastSpeed = speed; // will be modified in interrupt
+		lastSpeed = speed; // Will be modified in interrupt
 	}
 	
 }
@@ -48,20 +47,20 @@ __interrupt void USCI0RX_ISR(void) {        // Vector 2 - RXIFG
 	while (!(IFG2 & UCA0TXIFG));             // USCI_A0 TX buffer ready?
 	char data = UCA0RXBUF;                  // TX -> RXed character
 	if (data != '\n'){
-		switch(data){
-				case 'l':
+		switch(data){ //Check to see what data was sent.
+				case 'l': //If an l is received, set servo to turn left.
 					servoSetDuty(DUTY_LOWER_BOUND);
 					break;
-				case 'r':
+				case 'r': //If an r is received, set servo to turn left.
 					servoSetDuty(DUTY_UPPER_BOUND);
 					break;
-				case 's':
+				case 's': //If an s is received, set servo to go straight.
 					servoSetDuty(DUTY_MID_BOUND);
 					break;
-				default:
+				default: //If none of the values above are received, set speed.
 					speed = data;
 					break;
 			}
 	}
-	UCA0TXBUF = data;
+	UCA0TXBUF = data; //Seed feedback to the controller.
 }
