@@ -1,14 +1,13 @@
-/*
- * uart.h
- *
- *  Created on: Dec 16, 2014
- *      Author: jonathan
- */
 
 #ifndef UART_H_
 #define UART_H_
 
-void initUART();
+#include <stdint.h>
+#include <stdbool.h>
 
+void uart_init(void);
+void uart_send(char data);
+char uart_read(void);
+bool uart_wasRead(void);
 
 #endif /* UART_H_ */
