@@ -17,5 +17,9 @@
 #define PIN7 0x80
 
 #include <msp430.h>
+#include <ctype.h>
+#include "DCMotor.h"
+#include "uart.h"
+#include "servo.h"
 
 #endif /* SYSTEM_H_ */
