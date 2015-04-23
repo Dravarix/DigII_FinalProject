@@ -1,4 +1,4 @@
-#include "DCMotor.h"
+
 #include "system.h"
 
 void DCMotorInit(void){
@@ -20,7 +20,7 @@ void DCMotorInit(void){
 	P2SEL |= PIN2 + PIN5;
 
 	//Set TA1CCR0 so that our period is 20 ms
-	TA1CCR0 = 22000;
+	TA1CCR0 = MAXCOUNT;
 
 	//Set TA1CCR1 to have an initial duty cycle
 	TA1CCR1 = 0;
@@ -28,112 +28,45 @@ void DCMotorInit(void){
 	TA1CCR2 = 0;
 }
 
-void setDCMotorSpeed(int8_t motorASpeed, int8_t motorBSpeed){
+void setDCMotorDirection(uint8_t dir){
+	switch(dir){
+		case FORWARD:
+			//Set reverse pins low
+			P1OUT &= (~PIN5 + ~PIN6);
+			//Set forwards pins high
+			P1OUT |= PIN4 + PIN7;
+			break;
+		case BRAKE:
+			//Set reverse pins low
+			P1OUT &= (~PIN5 + ~PIN6);
+			//Set forwards pins high
+			P1OUT |= PIN4 + PIN7;
+			break;
+		case REVERSE:
+			//Set forward pins low
+			P1OUT &= (~PIN4 + ~PIN7);
+			//Set backwards pins high
+			P1OUT |= PIN5 + PIN6;
+			break;
+	}
+}
+
+void setDCMotorSpeed(uint16_t speed){
 	//Both motors going forwards
-	if(motorASpeed > 0 && motorBSpeed > 0){
-		//Set reverse pins low
-		P1OUT &= (~PIN5 + ~PIN6);
-		//Set forwards pins high
-		P1OUT |= PIN4 + PIN7;
-
+	if(speed > 0){
 		//Set duty cycle for the enable pins.
 		//This controls how fast the motors go.
 		//Boundary condition check
-		if(motorASpeed > maxSpeed){
-			TA1CCR1 = 173*maxSpeed;
+		if(speed > MAXCOUNT){
+			TA1CCR1 = MAXCOUNT;
+			TA1CCR2 = MAXCOUNT;
 		}
 		else{
-			TA1CCR1 = 173*motorASpeed;
-		}
-		//Boundary condition check
-		if(motorBSpeed > maxSpeed){
-			TA1CCR2 = 173*maxSpeed;
-		}
-		else{
-			TA1CCR2 = 173*motorBSpeed;
-		}
-	}
-	//Both motors going backwards
-	else if(motorASpeed < 0 && motorBSpeed < 0){
-		//Set forward pins low
-		P1OUT &= (~PIN4 + ~PIN7);
-		//Set backwards pins high
-		P1OUT |= PIN5 + PIN6;
-
-		//Set duty cycle for the enable pins.
-		//Boundary condition check
-		if(motorASpeed < -maxSpeed){
-			TA1CCR1 = -173*maxSpeed;
-		}
-		else{
-			TA1CCR1 = -173*motorASpeed;
-		}
-		//Boundary condition check
-		if(motorBSpeed < -maxSpeed){
-			TA1CCR2 = -173*maxSpeed;
-		}
-		else{
-			TA1CCR2 = -173*motorBSpeed;
-		}
-
-	}
-	//If motorA is going backwards and motorB is
-	//going forwards.
-	else if(motorASpeed < 0 && motorBSpeed > 0){
-		//Turn off forward pin for motor A
-		//Turn off backward pin for motor B
-		P1OUT &= (~PIN4 + ~PIN6);
-		//Turn on forward pin for motor B
-		//Turn on backward pin for motor A
-		P1OUT |= PIN5 + PIN7;
-
-		//Set duty cycle for the enable pins.
-		//Boundary condition check
-		if(motorASpeed < -maxSpeed){
-			TA1CCR1 = -173*maxSpeed;
-		}
-		else{
-			TA1CCR1 = -173*motorASpeed;
-		}
-		//Boundary condition check
-		if(motorBSpeed > maxSpeed){
-			TA1CCR2 = 173*maxSpeed;
-		}
-		else{
-			TA1CCR2 = 173*motorBSpeed;
-		}
-	}
-	//If motorA is going forward and motorB is
-	//going backwards
-	else if(motorASpeed > 0 && motorBSpeed < 0){
-		//Turn off forward pin for motor A
-		//Turn off backward pin for motor B
-		P1OUT &= (~PIN5 + ~PIN7);
-		//Turn on forward pin for motor B
-		//Turn on backward pin for motor A
-		P1OUT |= PIN4 + PIN6;
-
-		//Set duty cycle for the enable pins.
-		//This controls how fast the motors go.
-		//Boundary condition check
-		if(motorASpeed > maxSpeed){
-			TA1CCR1 = 173*maxSpeed;
-		}
-		else{
-			TA1CCR1 = 173*motorASpeed;
-		}
-		//Boundary condition check
-		if(motorBSpeed < -maxSpeed){
-			TA1CCR2 = -173*maxSpeed;
-		}
-		else{
-			TA1CCR2 = -173*motorBSpeed;
+			TA1CCR1 = speed;
+			TA1CCR2 = speed;
 		}
 	}
 	else{ //Stop motors
-		//Set all pins low
-		P1OUT &= (~PIN4 + ~PIN5 + ~PIN6 + ~PIN7);
-
 		//Set a duty cycle of 0 for enable pins
 		TA1CCR1 = 0;
 		TA1CCR2 = 0;
